@@ -1,69 +1,90 @@
-import streamlit as st
-import pandas as pd
 import numpy as np
-import plotly.express as px
 import os
-import tarfile
-import urllib.request
+import pandas as pd
+import plotly.express as px
+import streamlit as st
 
-# Example Data Addition
-DOWNLOAD_ROOT = "https://raw.githubusercontent.com/ageron/handson-ml2/master/"
-HOUSING_PATH = os.path.join("datasets", "housing")
-HOUSING_URL = DOWNLOAD_ROOT + "datasets/housing/housing.tgz"
+from dotenv import load_dotenv
+from sodapy import Socrata
 
-
-#############################################
-
-st.markdown("# Lorem ipsum")
 
 #############################################
 
-st.markdown("### Lorem ipsum dolor sit amet")
+st.markdown("# Rat Complaint Dataset")
 
 #############################################
 
-st.markdown('# Lorem ipsum dolor sit amet')
+st.markdown("### Below you can find the rat complaints in NYC over the past month")
 
 #############################################
-
-st.markdown('### Lorem ipsum dolor sit amet')
 
 # Insert Functions Here
-def fetch_housing_data(housing_url=HOUSING_URL, housing_path=HOUSING_PATH): # Example fetching housing data
-    """
-    This function fetches a dataset from a URL, saves it in .tgz format, and extracts it to a specified directory path.
+def load_data(endpoint):
+    '''
+    Loads in data from NYC Open Data
 
-    Inputs:
-    - housing_url (str): The URL of the dataset to be fetched.
-    - housing_path (str): The path to the directory where the extracted dataset should be saved.
+    Input:
+        - Endpoint (example: "a0aa-aaaa")
+        - Query in SQL format
 
-    Outputs: None
-    """
-    if not os.path.isdir(housing_path):
-        os.makedirs(housing_path)
-    tgz_path = os.path.join(housing_path, "housing.tgz")
-    urllib.request.urlretrieve(housing_url, tgz_path)
-    housing_tgz = tarfile.open(tgz_path)
-    housing_tgz.extractall(path=housing_path)
-    housing_tgz.close()
+    Output:
+        - Dataframe with information from client
+    '''
+    # Set up endpoint
+    endpoint = endpoint
+
+    # Load api key
+    load_dotenv()
+
+    # Get client information
+    client = Socrata('data.cityofnewyork.us',
+                    os.getenv('ny_app_token'),
+                    username = os.getenv('ny_api_key_id'),
+                    password = os.getenv('ny_api_key_secret'))
+    
+    # Get total number of records in api
+    # query_count = "SELECT COUNT(*)"
+    # NUM_RECORDS = int(client.get(endpoint, query = query_count)[0]['COUNT'])
+    
+    # query = f"""
+    #     LIMIT {1000}
+    # """
+    
+    # Get results from client
+    results = client.get(endpoint, limit=1500)
+
+    # Change results into dataframe
+    df = pd.DataFrame.from_records(results)
+
+    return df
+
+def load_rat_data_drive():
+    url = 'https://drive.google.com/file/d/11aUJLdJqLDfVq_LAbyw3DDKxZYFbEZH0/view?usp=share_link'
+    url = 'https://drive.google.com/uc?id=' + url.split('/')[-2]
+    df = pd.read_csv(url)
+
+    return df
 
 # Helper function
 @st.cache
 def convert_df(df):
-    """
+    '''
     Cache the conversion to prevent computation on every rerun
 
     Input: 
         - df: pandas dataframe
     Output: 
         - Save file to local file system
-    """
+    '''
     return df.to_csv().encode('utf-8')
 
 ###################### FETCH DATASET #######################
-df = None
+
+
+
+df = load_rat_data_drive()
 
 if df is not None:
     # Front End UI
-    df = None
+    st.write(df)
     
