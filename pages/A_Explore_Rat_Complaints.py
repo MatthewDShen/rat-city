@@ -45,18 +45,22 @@ def load_data(endpoint):
     # Get total number of records in api
     # query_count = "SELECT COUNT(*)"
     # NUM_RECORDS = int(client.get(endpoint, query = query_count)[0]['COUNT'])
+    NUM_RECORDS = 2000
     
-    # query = f"""
-    #     LIMIT {1000}
-    # """
+    query = f"""
+        SELECT *
+        LIMIT {NUM_RECORDS}
+    """
     
     # Get results from client
-    results = client.get(endpoint, limit=1500)
+    results = client.get(endpoint, query=query)
 
     # Change results into dataframe
     df = pd.DataFrame.from_records(results)
 
     return df
+
+print(load_data('cvf2-zn8s'))
 
 def load_rat_data_drive():
     url = 'https://drive.google.com/file/d/11aUJLdJqLDfVq_LAbyw3DDKxZYFbEZH0/view?usp=share_link'
@@ -82,7 +86,7 @@ def convert_df(df):
 
 
 
-df = load_rat_data_drive()
+df = load_data('cvf2-zn8s')
 
 if df is not None:
     # Front End UI
