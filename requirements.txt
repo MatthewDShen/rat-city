@@ -1,6 +1,6 @@
 # Numbers & Data
 numpy==1.24.3
-pandas==2.0.1
+# pandas>=2.0.1
 geopandas==0.12.2
 
 # User Interface
