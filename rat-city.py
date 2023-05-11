@@ -22,7 +22,7 @@ if df is not None:
     st.markdown('#### Explore Features')
 
     # Select Feature
-    explore_feature_lst = ['zipcode', 'population', 'area', 'rat count', 'score', 'critical flag', 'action', 'avg score', 'avg flags', 'postcode', 'sidewalk dimensions (area)', 'roadway dimensions (area)', 'approved for sidewalk seating', 'approved for roadway seating', 'qualify alcohol', 'total_number_restaurants']
+    explore_feature_lst = ['zipcode', 'population', 'area', 'rat count', 'critical flag', 'action', 'avg score', 'sidewalk dimensions (area)', 'roadway dimensions (area)', 'approved for sidewalk seating', 'approved for roadway seating', 'qualify alcohol', 'total_number_restaurants']
     explore_feature_str = st.selectbox('What feature would you like to explore?', explore_feature_lst)
 
     # Histogram
