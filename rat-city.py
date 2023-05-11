@@ -16,7 +16,9 @@ st.markdown('This program is currently only available for New York City')
 
 st.markdown('### On this page you can explore the data that we used to predict the number of rat sightings')
 
-df = pd.read_csv('processed_data/feature_data.csv')
+df = pd.read_csv('data/processed_data/feature_data.csv')
+
+st.write(df)
 
 st.markdown('#### Explore Relationship with Rat Counts')
 # Histogram
