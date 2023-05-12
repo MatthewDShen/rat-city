@@ -16,10 +16,17 @@ st.markdown('On this page you can build your own zipcode and see how many rats a
 
 # TODO: Import ML model with pickle
 
+def deploy_model(dict):
+    rat_count=None
+    model=st.session_state['deploy_model']
+
+    # Add code here
+    rat_count = model.predict(dict)
+
+    return rat_count
+
 # TODO: Import model data
 df = pd.read_csv('data/processed_data/feature_data.csv')
-
-st.write(df)
 
 if df is not None:
     st.markdown('#### Select how you would like to build your neighborhood')
@@ -39,8 +46,9 @@ if df is not None:
         
         if (zip_int and st.button('Confirm Zipcode')):
             st.session_state['scratch_bool'] = False
-            
 
+    user_inputs = {}
+            
     if 'scratch_bool' in st.session_state:
         # Confirm Zipcode
         if st.session_state['scratch_bool'] == False:
@@ -48,71 +56,95 @@ if df is not None:
 
         # Population
         if st.session_state['scratch_bool']:
-            st.number_input('Select Population', min_value = 0)
+            pop_user_select = st.number_input('Select Population', min_value = 0)
+            user_inputs['population'] = pop_user_select
         else:
-            st.number_input('Select Population', min_value = 0, value = int(df.iloc[zip_index_int]['population']))
+            pop_user_select = st.number_input('Select Population', min_value = 0, value = int(df.iloc[zip_index_int]['population']))
+            user_inputs['population'] = pop_user_select
 
         # Area
         if st.session_state['scratch_bool']:
-            st.number_input('Select Area (sqft)', min_value = 0.0)
+            area_user_select = st.number_input('Select Area (sqft)', min_value = 0.0)
+            user_inputs['area'] = area_user_select
         else:
-            st.number_input('Select Area (sqft)', min_value = 0.0, value = df.iloc[zip_index_int]['area'])
+            area_user_select = st.number_input('Select Area (sqft)', min_value = 0.0, value = df.iloc[zip_index_int]['area'])
+            user_inputs['area'] = area_user_select
 
         # Critical Flag
         if st.session_state['scratch_bool']:
-            st.number_input('Critical Flags', min_value = 0.0)
+            flags_user_select = st.number_input('Critical Flags', min_value = 0.0)
+            user_inputs['critical flag'] = flags_user_select
         else:
-            st.number_input('Critical Flags', min_value = 0.0, value = df.iloc[zip_index_int]['critical flag'])
+            flags_user_select = st.number_input('Critical Flags', min_value = 0.0, value = df.iloc[zip_index_int]['critical flag'])
+            user_inputs['critical flag'] = flags_user_select
         
         # Action
         if st.session_state['scratch_bool']:
-            st.number_input('Number of Actions', min_value = 0.0)
+            actions_user_select = st.number_input('Number of Actions', min_value = 0.0)
+            user_inputs['action'] = actions_user_select
         else:
-            st.number_input('Number of Actions', min_value = 0.0, value = df.iloc[zip_index_int]['action'])
+            actions_user_select = st.number_input('Number of Actions', min_value = 0.0, value = df.iloc[zip_index_int]['action'])
+            user_inputs['action'] = actions_user_select
 
         # Average Score
         st.markdown('Choose a health rating from 0 (best) to 40 (worst):')
         if st.session_state['scratch_bool']:
-            st.slider('A(0-13) B(14-27) C(28-40)', min_value=0, max_value=40, value=20)
+            health_rating_user_select = st.slider('A(0-13) B(14-27) C(28-40)', min_value=0, max_value=40, value=20)
+            user_inputs['avg score'] = health_rating_user_select
         else:
-            st.slider('A(0-13) B(14-27) C(28-40)', min_value=0, max_value=40, value=int(df.iloc[zip_index_int]['avg score']))
+            health_rating_user_select = st.slider('A(0-13) B(14-27) C(28-40)', min_value=0, max_value=40, value=int(df.iloc[zip_index_int]['avg score']))
+            user_inputs['avg score'] = health_rating_user_select
         
         # Sidewalk Dimensions (SQFT)
         if st.session_state['scratch_bool']:
-            st.number_input('Sidewalk Dimensions (sqft)', min_value = 0.0)
+            sidwalk_user_select = st.number_input('Sidewalk Dimensions (sqft)', min_value = 0.0)
+            user_inputs['sidewalk dimensions (area)'] = sidwalk_user_select
         else:
-            st.number_input('Sidewalk Dimensions (sqft)', min_value = 0.0, value = df.iloc[zip_index_int]['sidewalk dimensions (area)'])
+            sidwalk_user_select = st.number_input('Sidewalk Dimensions (sqft)', min_value = 0.0, value = df.iloc[zip_index_int]['sidewalk dimensions (area)'])
+            user_inputs['sidewalk dimensions (area)'] = sidwalk_user_select
         
         # Roadway Dimensions (SQFT)
         if st.session_state['scratch_bool']:
-            st.number_input('Roadway Dimensions (sqft)', min_value = 0.0)
+            roadway_user_select = st.number_input('Roadway Dimensions (sqft)', min_value = 0.0)
+            user_inputs['roadway dimensions (area)'] = roadway_user_select
         else:
-            st.number_input('Roadway Dimensions (sqft)', min_value = 0.0, value = df.iloc[zip_index_int]['roadway dimensions (area)'])
+            roadway_user_select = st.number_input('Roadway Dimensions (sqft)', min_value = 0.0, value = df.iloc[zip_index_int]['roadway dimensions (area)'])
+            user_inputs['roadway dimensions (area)'] = roadway_user_select
 
         col1, col2 = st.columns(2)
         with(col1):
             # Approved for Sidewalk Seating
             if st.session_state['scratch_bool']:
-                st.number_input('Number of Restaurants Approved for Sidewalk Seating', min_value = 0)
+                sidewalk_seating_user_select = st.number_input('Number of Restaurants Approved for Sidewalk Seating', min_value = 0)
+                user_inputs['approved for sidewalk seating'] = sidewalk_seating_user_select
             else:
-                st.number_input('Number of Restaurants Approved for Sidewalk Seating', min_value = 0, value = df.iloc[zip_index_int]['approved for sidewalk seating'])
+                sidewalk_seating_user_select = st.number_input('Number of Restaurants Approved for Sidewalk Seating', min_value = 0, value = df.iloc[zip_index_int]['approved for sidewalk seating'])
+                user_inputs['approved for sidewalk seating'] = sidewalk_seating_user_select
         with(col2):
             # Approved for Sidewalk Seating
             if st.session_state['scratch_bool']:
-                st.number_input('Number of Restaurants Approved for Roadway Seating', min_value = 0)
+                roadway_seating_user_select = st.number_input('Number of Restaurants Approved for Roadway Seating', min_value = 0)
+                user_inputs['approved for roadway seating'] = roadway_seating_user_select
             else:
-                st.number_input('Number of Restaurants Approved for Roadway Seating', min_value = 0, value = df.iloc[zip_index_int]['approved for roadway seating'])
+                roadway_seating_user_select = st.number_input('Number of Restaurants Approved for Roadway Seating', min_value = 0, value = df.iloc[zip_index_int]['approved for roadway seating'])
+                user_inputs['approved for roadway seating'] = roadway_seating_user_select
         
         # Qualify Alcohol
         if st.session_state['scratch_bool']:
-            st.number_input('Number of Restaurants that Serve Alcohol', min_value = 0)
+            alc_user_select = st.number_input('Number of Restaurants that Serve Alcohol', min_value = 0)
+            user_inputs['qualify alcohol'] = alc_user_select
         else:
-            st.number_input('Number of Restaurants that Serve Alcohol', min_value = 0, value = df.iloc[zip_index_int]['qualify alcohol'])
+            alc_user_select = st.number_input('Number of Restaurants that Serve Alcohol', min_value = 0, value = df.iloc[zip_index_int]['qualify alcohol'])
+            user_inputs['qualify alcohol'] = alc_user_select
         
         # Total Number Restaurants
         if st.session_state['scratch_bool']:
-            st.number_input('Number of Restaurants', min_value = 0)
+            num_restaurants_user_select = st.number_input('Number of Restaurants', min_value = 0)
+            user_inputs['total_number_restaurants'] = num_restaurants_user_select
         else:
-            st.number_input('Number of Restaurants', min_value = 0, value = df.iloc[zip_index_int]['total_number_restaurants'])
+            num_restaurants_user_select = st.number_input('Number of Restaurants', min_value = 0, value = df.iloc[zip_index_int]['total_number_restaurants'])
+            user_inputs['total_number_restaurants'] = num_restaurants_user_select
+        
+        st.write(user_inputs)
 
     
