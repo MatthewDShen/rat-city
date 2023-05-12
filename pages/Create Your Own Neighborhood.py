@@ -1,6 +1,7 @@
 import geopandas as gpd
 import pandas as pd
 import pickle
+import matplotlib.pyplot as plt
 import streamlit as st
 
 
@@ -25,8 +26,23 @@ def deploy_model(dict):
 
     return rat_count
 
-# TODO: Import model data
+def show_map(df,zip_index_int):
+
+    fig, ax = plt.subplots()
+
+    gdf = gpd.GeoDataFrame(df, geometry='geometry', crs='EPSG:2263')
+
+    explore_lst = [0] * len(gdf)
+    explore_lst[zip_index_int] = 1
+    gdf['explore zip'] = explore_lst
+
+    gdf.plot(column = 'explore zip', ax=ax)
+    ax.axis('off')
+    return fig
+
+# Import model data
 df = pd.read_csv('data/processed_data/feature_data.csv')
+df['geometry'] = gpd.GeoSeries.from_wkt(df['geometry'])
 
 if df is not None:
     st.markdown('#### Select how you would like to build your neighborhood')
@@ -53,6 +69,12 @@ if df is not None:
         # Confirm Zipcode
         if st.session_state['scratch_bool'] == False:
             st.write('You have selected to adjust {}'.format(zip_int))
+        
+        # Map
+        if st.session_state['scratch_bool']:
+            pass
+        else:
+            st.pyplot(show_map(df,zip_index_int))
 
         # Population
         if st.session_state['scratch_bool']:
