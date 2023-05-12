@@ -34,4 +34,11 @@ st.markdown('- Polynomial Regression (2 degrees)')
 st.markdown('- Ridge Regression (5 cv folds)')
 st.markdown('- Lasso Regression (5 cv folds)')
 
+st.markdown('#### Evaluation')
+st.image('model_training/error_plots/polynomial regression.png')
+st.image('model_training/error_plots/multiple linear regression.png')
+st.image('model_training/error_plots/ridge regression.png')
+st.image('model_training/error_plots/lasso regression.png')
 
+st.markdown('#### Final Selection')
+st.markdown('##### Lasso Regression (5 cv folds)')
