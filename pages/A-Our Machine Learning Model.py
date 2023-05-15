@@ -12,11 +12,13 @@ st.markdown('### On this page we explore how we built our model')
 
 df = pd.read_csv('data/processed_data/feature_data.csv')
 model_linear = pickle.load(open('model_training/trained_linear_model.pickle', 'rb'))
+model_poly = pickle.load(open('model_training/trained_poly_model.pickle', 'rb'))
 model_ridge = pickle.load(open('model_training/trained_ridge_model.pickle', 'rb'))
 model_lasso = pickle.load(open('model_training/trained_lasso_model.pickle', 'rb'))
 
 models = {
     'Multiple Linear Regression': model_linear,
+    'Polynomial Regression': model_poly,
     'Ridge Regression': model_ridge,
     'Lasso Regression': model_lasso,
 }
