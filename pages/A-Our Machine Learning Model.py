@@ -1,5 +1,6 @@
 import pandas as pd
 import streamlit as st
+import pickle
 
 st.markdown('# Rat City')
 
@@ -10,6 +11,7 @@ st.markdown('### On this page we explore how we built our model')
 #############################################
 
 df = pd.read_csv('data/processed_data/feature_data.csv')
+model = pickle.load(open('model_training/trained_model.pickle', 'rb'))
 
 st.markdown('#### Model Data')
 
@@ -45,5 +47,16 @@ st.image('model_training/error_plots/ridge regression.png')
 st.image('model_training/error_plots/lasso regression.png')
 st.markdown('- multiple linear regression, ridge, and lasso has similar values so overfitting is unlikley')
 
-st.markdown('#### Final Selection')
+st.markdown('#### Model Selection')
 st.markdown('##### Lasso Regression (5 cv folds)')
+
+st.markdown('##### Coefficents from model')
+features_lst = ['population', 'avg score', 'critical flag', 'sidewalk dimensions (area)', 'roadway dimensions (area)', 'approved for sidewalk seating', 'approved for roadway seating', 'qualify alcohol', 'total_number_restaurants']
+coeff_df = pd.DataFrame(model[-1].best_estimator_.coef_, index = features_lst, columns = ['Lasso Regression'])
+
+st.write(coeff_df)
+
+st.markdown('- Multiple Linear Regression, Ridge, and Lasso had similar error values so we selected lasso because it would be the easiest to add new features to incase the ratczar managed to get more data in the future')
+st.markdown('- Because population, approval for sidewalk seating, and the number of restaurants that qualify for alcohol are the only features with non-zero coefficents changing the other feature inputs will not have an effect on the final results once deployed')
+st.markdown('- Based on our model population is the best indicator of rat count because it has the highest value')
+st.markdown('- Our model also showed that number of restaurants that qualify for alcohol is the least correlated value that is non-zero')
