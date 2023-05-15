@@ -28,6 +28,10 @@ st.markdown('- number of restaurants approved for roadway seating')
 st.markdown('- number of restaurants that serve alcohol')
 st.markdown('- number of restaurants')
 
+st.markdown('#### Train/Test Split')
+st.markdown('- 75% of data used for training')
+st.markdown('- 25% used for validation')
+
 st.markdown('#### Models Tested')
 st.markdown('- Multiple Linear Regression')
 st.markdown('- Polynomial Regression (2 degrees)')
@@ -39,6 +43,7 @@ st.image('model_training/error_plots/polynomial regression.png')
 st.image('model_training/error_plots/multiple linear regression.png')
 st.image('model_training/error_plots/ridge regression.png')
 st.image('model_training/error_plots/lasso regression.png')
+st.markdown('- multiple linear regression, ridge, and lasso has similar values so overfitting is unlikley')
 
 st.markdown('#### Final Selection')
 st.markdown('##### Lasso Regression (5 cv folds)')
