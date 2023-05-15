@@ -4,15 +4,21 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 
-st.markdown('# Rat City')
+
 
 #############################################
+col1, col2 = st.columns(2)
+with(col1):
+    st.markdown('# Rat City')
+    st.markdown('### Predicting Rat Complaints Based on Restaurant Data in New York City')
+    st.markdown('"Fighting crime, fighting inequiality, and fighting rats." - Mayor Eric Adams')
+    st.markdown('[Rats](https://www.nytimes.com/2023/04/12/nyregion/rat-czar-kathleen-corradi.html) [are](https://www.nytimes.com/2021/11/08/nyregion/an-urban-problem-rats-on-the-rise.html) [a](https://www.frontiersin.org/articles/10.3389/fevo.2019.00013/full) [major](https://www.google.com/url?q=https://royalsocietypublishing.org/doi/10.1098/rspb.2018.0245&sa=D&source=editors&ust=1684113286168462&usg=AOvVaw2ssovpBBcY7KyO9YnhmDKT) [problem](https://www.wsj.com/articles/new-york-city-has-two-million-rats-and-one-new-rat-czar-35780bd5) [for](https://www.theatlantic.com/science/archive/2017/11/rats-of-new-york/546959/) [New York City!](https://a816-health.nyc.gov/ABCEatsRestaurants/#!/faq)')
+    st.markdown('One of the first applications of ML to understand rat locations')
+with(col2):
+    st.image('./rat.png')
 
-st.markdown('### A Machine Learning tool to help the Rat Czar clean the streets of NYC by better predicting where rats will be')
-st.markdown('"Fighting crime, fighting inequiality, and fighting rats." - Mayor Eric Adams')
-st.markdown('[Rats](https://www.nytimes.com/2023/04/12/nyregion/rat-czar-kathleen-corradi.html) [are](https://www.nytimes.com/2021/11/08/nyregion/an-urban-problem-rats-on-the-rise.html) [a](https://www.frontiersin.org/articles/10.3389/fevo.2019.00013/full) [major](https://www.google.com/url?q=https://royalsocietypublishing.org/doi/10.1098/rspb.2018.0245&sa=D&source=editors&ust=1684113286168462&usg=AOvVaw2ssovpBBcY7KyO9YnhmDKT) [problem](https://www.wsj.com/articles/new-york-city-has-two-million-rats-and-one-new-rat-czar-35780bd5) [for](https://www.theatlantic.com/science/archive/2017/11/rats-of-new-york/546959/) [New York City!](https://a816-health.nyc.gov/ABCEatsRestaurants/#!/faq)')
 
-st.markdown('One of the first applications of ML to understand rat locations')
+
 
 #############################################
 
