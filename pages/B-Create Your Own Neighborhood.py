@@ -155,6 +155,6 @@ if df is not None and model is not None:
         
         num_rats = deploy_model(model,user_inputs)
 
-        st.write('From our model we can predict that {} rat citings will occur each year'.format(num_rats))
+        st.write('From our model we can predict that {} rat complaints will occur each year'.format(num_rats))
 
     

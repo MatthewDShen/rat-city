@@ -159,6 +159,12 @@ if df is not None and model is not None:
         
         num_rats = deploy_model(model,user_inputs)
 
-        st.write('From our model we can predict that {} rat citings will occur each year'.format(num_rats))
+        st.write('From our model we can predict that {} rat complaints will occur each year'.format(num_rats))
+        
+        st.markdown('##### Our Recommendation is Lasso Regression (5 cv folds)')
+        st.markdown('- Multiple Linear Regression, Ridge, and Lasso had similar error values so we selected lasso because it would be the easiest to add new features to incase the ratczar managed to get more data in the future')
+        st.markdown('- Because population, approval for sidewalk seating, and the number of restaurants that qualify for alcohol are the only features with non-zero coefficents changing the other feature inputs will not have an effect on the final results once deployed')
+        st.markdown('- Based on our model population is the best indicator of rat count because it has the highest value')
+        st.markdown('- Our model also showed that number of restaurants that qualify for alcohol is the least correlated value that is non-zero')
 
     

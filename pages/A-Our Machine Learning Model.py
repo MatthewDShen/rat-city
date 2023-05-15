@@ -51,11 +51,12 @@ st.markdown('- Ridge Regression (5 cv folds)')
 st.markdown('- Lasso Regression (5 cv folds)')
 
 st.markdown('#### Evaluation')
-st.image('model_training/error_plots/polynomial regression.png')
 st.image('model_training/error_plots/multiple linear regression.png')
+st.image('model_training/error_plots/polynomial regression.png')
 st.image('model_training/error_plots/ridge regression.png')
 st.image('model_training/error_plots/lasso regression.png')
-st.markdown('- multiple linear regression, ridge, and lasso has similar values so overfitting is unlikley')
+st.markdown('- polynomial regression heavily overfit')
+st.markdown('- multiple linear regression, ridge, and lasso has similar values')
 
 st.markdown('#### Model Selection')
 st.markdown('##### Coefficents from model')
@@ -68,13 +69,11 @@ st.write(coeff_df)
 
 model_select = st.selectbox('What model would you like to use', ['Multiple Linear Regression', 'Polynomial Regression', 'Ridge Regression', 'Lasso Regression'])
 
+
+
+
+
 if (model_select):
     st.session_state['model'] = models[model_select]
-
-st.markdown('##### Our Recommendation is Lasso Regression (5 cv folds)')
-st.markdown('- Multiple Linear Regression, Ridge, and Lasso had similar error values so we selected lasso because it would be the easiest to add new features to incase the ratczar managed to get more data in the future')
-st.markdown('- Because population, approval for sidewalk seating, and the number of restaurants that qualify for alcohol are the only features with non-zero coefficents changing the other feature inputs will not have an effect on the final results once deployed')
-st.markdown('- Based on our model population is the best indicator of rat count because it has the highest value')
-st.markdown('- Our model also showed that number of restaurants that qualify for alcohol is the least correlated value that is non-zero')
 
 

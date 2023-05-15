@@ -32,11 +32,18 @@ if df is not None:
     st.markdown('### Preprocessed Data')
     st.write(df)
 
+    st.write('#### Data Cleaning Process')
+    st.write('- Removed irrelevant, redundant columns ')
+    st.write('- Filtered out rows with missing or messy data')
+    st.write('- Filtered for 2022 inspections only')
+    st.write('- Joined open restaurant with 2022 restaurants')
+    st.write('- Groupby zip code calculate sums and averages for features')
+    
     st.markdown('#### Explore Features')
 
     # Select Feature
     explore_feature_lst = ['zipcode', 'rat count', 'population', 'avg score', 'critical flag', 'sidewalk dimensions (area)', 'roadway dimensions (area)', 'approved for sidewalk seating', 'approved for roadway seating', 'qualify alcohol', 'total_number_restaurants']
-    explore_feature_str = st.selectbox('What feature would you like to explore?', explore_feature_lst)
+    explore_feature_str = st.selectbox('What feature would you like to explore?', explore_feature_lst, index = 1)
 
     # Histogram
     st.write(px.histogram(data_frame=df, x=explore_feature_str))
@@ -54,12 +61,7 @@ if df is not None:
     corr_float = round(df['rat count'].corr(df[explore_feature_str]),3)
     st.write('The correlation between rat count and {0} is {1}'.format(explore_feature_str, corr_float))
 
-    st.write('#### Data Cleaning Process')
-    st.write('- Removed irrelevant, redundant columns ')
-    st.write('- Filtered out rows with missing or messy data')
-    st.write('- Filtered for 2022 inspections only')
-    st.write('- Joined open restaurant with 2022 restaurants')
-    st.write('- Groupby zip code calculate sums and averages for features')
+
 
     # Store Dataframe
     st.session_state['df'] = df
