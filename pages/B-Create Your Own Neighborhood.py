@@ -43,7 +43,7 @@ df = pd.read_csv('data/processed_data/feature_data.csv')
 df['geometry'] = gpd.GeoSeries.from_wkt(df['geometry'])
 
 # Import model
-model = pickle.load(open('model_training/trained_model.pickle', 'rb'))
+model = pickle.load(open('model_training/trained_ridge_model.pickle', 'rb'))
 
 if df is not None and model is not None:
     st.markdown('#### Select how you would like to build your neighborhood')
