@@ -16,6 +16,7 @@ Datasets using - all from open data, constantly updated, but looking at 2022:
 - 311 Service Requests from 2010 to Present (to get rat complaints)
 - DOHMH New York City Restaurant Inspection Results (most recent restaurant inspection results)
 - Open Restaurants Inspections | NYC Open Data (cityofnewyork.us) (open restaurant inspection results)
+
 Features:
 - number of rat complaints 
 - number of restaurants, num with alcohol
@@ -29,6 +30,7 @@ Data cleaning:
 - Joined open restaurant applications with 2022 health inspection, to get operating restaurants
 - Convert categorical data to binary or one-hot encoding
 - Group by zipcode - to get predictions on geographical zone basis
+
 Dataset exploration:
 - visualization options to plot and explore the data:
 - Chromoplots to see the number of rats, number of restaurants, average health inspection grade by zip code
@@ -37,11 +39,13 @@ Dataset exploration:
 
 # Methods and Model Training
 ML techniques - regression
+
 Models we investigated:
 - multiple regression
 - polynomial regression
 - ridge regression
 - lasso regression
+
 Cross validation used to address over/underfitting, address the limited number of rows (only 100-something zip codes, so not many data points to train on)
 
 # Model Evaluation
