@@ -49,9 +49,9 @@ Models we investigated:
 Cross validation used to address over/underfitting, address the limited number of rows (only 100-something zip codes, so not many data points to train on)
 
 # Model Evaluation
-Used MAE, RMSE, R2 score to evaluate
-Specified solver, CV folds, training size hyperparameters
-Compared training vs validataion errors
+The model evaluation was conducted in `model_training/model_evaluation.ipynb`. There, we created a number of helper functions (inspired by the homework assignments) to train and evaluate different regression models. We evaluated the models based on MAE, RMSE, and R2. We also used cross validation because of the limited number of rows in our dataset and to avoid overfitting our data. We trained over an array of solvers and tolerances.
+
+We found that polynomial regression tended to overfit. Linear, Lasso, and Ridge regression all had similar levels of over/underfitting and had similar error rates across the three error metrics we used. We thus chose to move forward with Lasso regression because it trains and predicts quickly and sets less-important feature coefficients to zero, thus creating a "leaner" model.
 
 # Model Deployment
 
