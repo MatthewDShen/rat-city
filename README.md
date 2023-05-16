@@ -4,7 +4,9 @@ Develop a model to predict the number of rats based on restaurant numbers and qu
 The mayor is interested in taming the rat population, so this is a relevant project to the city's goals and can have practical applications to the city. It will identify if there are correaltions between specific restaurant features and rat complaints
 
 Technical: regression methods allow us to find relationships between features and the rat population and also evaluate the relative impact of different features on the population
+
 Novelty of approach: combining open-source datasets and tailoring them to focus on rat populations
+
 Impact: Rats cause health problems and tear open trash on streets and make city dirtier, so being able to predict where rats will be will be helpful. Being able to predict amount of rats could help better direct city funds to appropriate locations to pest control
 
 We haven’t found rat machine learning papers relevant to our project (only papers discussing rats and machine learning have been in medical contexts)
