@@ -54,8 +54,16 @@ The model evaluation was conducted in `model_training/model_evaluation.ipynb`. T
 We found that polynomial regression tended to overfit. Linear, Lasso, and Ridge regression all had similar levels of over/underfitting and had similar error rates across the three error metrics we used. We thus chose to move forward with Lasso regression because it trains and predicts quickly and sets less-important feature coefficients to zero, thus creating a "leaner" model.
 
 # Model Deployment
+The code for final deployment can be found in `pages/B-Creat Your Own Neighborhood.py` and `pages/C-RatCzar Model.py`. In `pages/A-Our Machine Learning Model.py` you can select the type of model you want to analyze in `pages/B-Creat Your Own Neighborhood.py`.
+
+`pages/C-RatCzar Model.py` shows the deployment of the Lasso model with only the features that will effect the final results.
 
 # Front-end
+In order to run the deployment you first need to install all the packages found in `requirements.txt` Then in your terminal use the command
+
+`streamlit run rat-city.py`
+
+A web browser should pop up with the information on `rat-city.py` and all the files in `pages`
 
 # Results
 
