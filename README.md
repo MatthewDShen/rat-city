@@ -67,3 +67,12 @@ A web browser should pop up with the information on `rat-city.py` and all the fi
 
 # Results
 
+Our analysis led us to select Lasso regression as the most effective model for predicting rat complaints within the city. Throughout our investigation, we discovered that population density had a more significant impact on the number of rat complaints than the number of restaurants in a given area. This insight allowed us to streamline our model inputs, facilitating a more user-friendly experience.
+
+The final product of our project is a user-friendly Streamlit application that provides a practical tool for city officials and concerned citizens alike. The application enables users to enter specific parameters, such as the population of a specific zip code or the number of restaurants with alcohol licenses, and receive an estimation of the potential number of rat complaints that area could generate.
+
+However, it's important to note that our model and its results may be influenced by the biases in our data source. The 311 data is heavily reliant on citizen reporting, which can introduce variations in the number of rat complaints. Some areas may have more proactive citizens leading to a higher number of complaints, while others may have less reported complaints due to lack of engagement, despite the potential severity of the rat problem.
+
+Looking forward, we aim to integrate additional datasets into our model. A promising candidate for consideration could be municipal trash collection data, including the schedule and frequency of collections. This could potentially improve the accuracy of our rat complaint predictions by providing an additional perspective on factors that might influence rat populations.
+
+In summary, our project has demonstrated the potential of using machine learning models to assist in urban pest control, although our results also highlight the importance of considering data biases and exploring a broader range of influential factors. By continually refining our model and integrating new data sources, we believe we can further improve our predictions and contribute to more effective rat control strategies within the city.
